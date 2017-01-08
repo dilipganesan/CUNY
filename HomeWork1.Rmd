@@ -1,0 +1,51 @@
+---
+title: "CUNY"
+author: "Dilip Ganesan"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+#1. Create a loop for 12 fact calculation.
+x<-1
+y<-12
+for(i in 1:y)
+{
+  x <- x * i
+  print(x)
+  }
+
+#2. vector that contains sequence of number from 20 to 50 increment by 5
+
+x<-20
+vect = c()
+for(i in 1:7)
+{
+  #print(x)
+  vect[i] = x
+  x = x + 5
+  print(vect)
+}
+
+#3. Quadratic Equation function.
+
+quadratic = function(a,b,c) {
+    D = (b^2-4*a*c)
+    if (D > 0) {
+        x1 = (-b + sqrt(D))/(2*a)
+        x2 = (-b - sqrt(D))/(2*a)
+        rt = c(x1, x2)
+        print(rt)
+    } else if (D==0) {
+        x1 <- (-b + sqrt(D))/(2*a)
+        rt <- c(x1)
+        print(rt)
+    } else if (D < 0) {
+        x1 <- (-b + sqrt(as.complex(D)))/(2*a)
+        x2 <- (-b - sqrt(as.complex(D)))/(2*a)
+        rt <- c(x1, x2)
+        print(rt)
+    }
+}
+quadratic(1,-3,-4)
+quadratic(1,0,-4)
