@@ -1,0 +1,68 @@
+---
+title: "R_Home_Work_2"
+author: "dilipganesan"
+date: "January 13, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+if (!require("data.table")) install.packages('data.table')
+if (!require("plyr")) install.packages('plyr')
+library(data.table)
+library(plyr)
+
+#Util Method to calculate the mean and median.
+meanandMedian=function(a,b){
+  meanIncome=mean(a)
+  medianHS=median(b) 
+  print(meanIncome)
+  print(medianHS)
+}
+
+```
+
+
+
+```{r}
+#1. Reading the CSV file from github
+mydata=fread('https://raw.github.com/vincentarelbundock/Rdatasets/master/csv/Stat2Data/Election08.csv')
+mydata=data.frame(mydata)
+
+#2. Use the summary function to gain an overview of the data set. 
+summary(mydata)
+
+#Then display the mean and median for at least two attributes.
+meanandMedian(mydata$Income,mydata$HS)
+
+#3.Create a new data frame with a subset of the columns and rows. Make sure to rename it.
+newData=subset(mydata, mydata$Income>40000 & mydata$ObamaWin==1)
+# Summary and Printing New Data Frame.
+summary(newData)
+print(newData)
+
+
+#4.Create new column names for the new data frame
+modata=plyr::rename(newData,c("Income"="fortyKIncome","ObamaWin"="BarackWin"))
+print(modata)
+
+#5.Use the summary function to create an overview of your new data frame. The print the mean
+#and median for the same two attributes. Please compare.
+summary(modata)
+meanandMedian(modata$fortyKIncome,modata$HS)
+
+#5 Replace the value of "e" in dataframe with Excellent. Used gsub for substring.
+resultData<-as.data.frame(sapply(modata,gsub,pattern="e",replacement="Excellent",ignore.case = TRUE))
+#Printing the resultant modified data.
+print(resultData)
+
+
+
+```
+
+
+
+```{r}
+
+```
+
+
